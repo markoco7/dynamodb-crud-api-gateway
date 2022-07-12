@@ -47,7 +47,7 @@ const createPost = async (event) => {
     const body = JSON.parse(event.body);
     const params = {
       TableName: 'posts-table-dev',
-      Key: marshall(body || {}),
+      Item: marshall(body || {}),
     };
 
     const createResult = await db.send(new PutItemCommand(params));
