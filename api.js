@@ -14,7 +14,7 @@ const getPost = async (event) => {
 
   try {
     const params = {
-      TableName: process.env.DYNAMODB_TABLE_NAME,
+      TableName: 'posts-table-dev',
       Key: marshall({ postId: event.pathParameters.postId }),
     };
 
@@ -46,7 +46,7 @@ const createPost = async (event) => {
   try {
     const body = JSON.parse(event.body);
     const params = {
-      TableName: process.env.DYNAMODB_TABLE_NAME,
+      TableName: 'posts-table-dev',
       Key: marshall(body || {}),
     };
 
@@ -76,7 +76,7 @@ const updatePost = async (event) => {
     const body = JSON.parse(event.body);
     const objKeys = Object.keys(body);
     const params = {
-      TableName: process.env.DYNAMODB_TABLE_NAME,
+      TableName: 'posts-table-dev',
       Key: marshall({ postId: event.pathParameters.postId }),
       UpdateExpression: `SET ${objKeys
         .map((_, index) => `#key${index} = :value${index}`)
@@ -123,7 +123,7 @@ const deletePost = async (event) => {
 
   try {
     const params = {
-      TableName: process.env.DYNAMODB_TABLE_NAME,
+      TableName: 'posts-table-dev',
       Key: marshall({ postId: event.pathParameters.postId }),
     };
 
@@ -151,7 +151,7 @@ const getAllPosts = async (event) => {
 
   try {
     const { Items } = await db.send(
-      new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME })
+      new ScanCommand({ TableName: 'posts-table-dev' })
     );
 
     response.body = JSON.stringify({
