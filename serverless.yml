@@ -99,5 +99,5 @@ resources:
           - AttributeName: postId
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacity: 1
-          WriteCapacity: 1
+          ReadCapacityUnits: 1
+          WriteCapacityunits: 1
